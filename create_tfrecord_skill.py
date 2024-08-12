@@ -61,14 +61,13 @@ def create_tf_example(group, path):
     with open(FLAGS.labelmap, 'r') as f:
         labels = [line.strip() for line in f.readlines()]
 
-   for index, row in group.object.iterrows():
-    xmins.append(row['xmin'] / width)
-    xmaxs.append(row['xmax'] / width)
-    ymins.append(row['ymin'] / height)
-    ymaxs.append(row['ymax'] / height)
-    classes_text.append(str(row['class']).encode('utf8'))  # Convert class label to string before encoding
-    classes.append(int(labels.index(str(row['class'])) + 1))  # Ensure class is treated as string for label lookup
-
+    for index, row in group.object.iterrows():
+        xmins.append(row['xmin'] / width)
+        xmaxs.append(row['xmax'] / width)
+        ymins.append(row['ymin'] / height)
+        ymaxs.append(row['ymax'] / height)
+        classes_text.append(str(row['class']).encode('utf8'))  # Convert class label to string before encoding
+        classes.append(int(labels.index(str(row['class'])) + 1))  # Ensure class is treated as string for label lookup
 
     tf_example = tf.train.Example(features=tf.train.Features(feature={
         'image/height': dataset_util.int64_feature(height),
