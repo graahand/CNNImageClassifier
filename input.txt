@@ -1,0 +1,72 @@
+# DOCKER & CONTAINERIZATION
+
+## BEFORE DOCKER
+
+Before Docker, applications had to be deployed and shipped individually, with resources allocated separately for each application on the server. This inefficient approach of using separate operating systems and resources for individual applications hindered application scalability. VMware addressed this resource management challenge by using a Hypervisor to distribute server resources across multiple virtual machines within the same operating system and server.  
+
+A hypervisor (Virtual Machine Monitor) is a software layer that enables virtual machines to run on host hardware. Type 1 hypervisors (like VMware ESXi) run directly on hardware, while Type 2 (like VirtualBox) run on top of an operating system. They manage resource allocation between VMs, ensuring efficient hardware utilization and isolation.
+
+However, this virtualization approach still required significant overhead since each virtual machine needed its own operating system. This led to the development of containerization technologies like Docker, which provide a more lightweight solution by sharing the host operating system's kernel while maintaining isolation between applications. Docker containers package applications with their dependencies, making them portable and efficient to deploy across different environments.
+
+An application on a VM requires a guest OS and thus an underlying hypervisor to run. The virtual machines created by Hypervisor have their own operating system and do not use the host’s operating system. They  have some resources allocated. Containerization is an efficient method for deploying the applications where the container encapsulates an application with its own base operating environment.  It can be placed on any host machine without special configuration, removing the issue of dependencies and package conflicts. 
+
+VM is a hardware virtualization whereas containerization is OS virtualization. Essentially, containerization is a lightweight and go-to approach to virtualization.
+
+## What is  Docker?
+
+Docker is a container platform that allows you to build, test, and deploy applications quickly. A developer defines all the applications and their dependencies in a Dockerfile, which is then used to build Docker images that define Docker containers. This process ensures that your application will run in any environment.
+
+## Theoretical Foundations of Reinforcement Learning
+
+### Markov Decision Process (MDP)
+
+Markov process is the simplest child of the Markov family, which is also known as Markov chain. Imagine an observable system only by yourself, what you observe is called states, and the system can switch between the states. The set of the all possible states is known as state space. For Markov process, the number of possible states need to be finite. Also, the system can not be influenced by you but can be observe while it changing. 
+
+For example, looking at the simplest model of the weather in some city, we can observe the current day as sunny or rainy, which is our state space. A sequence of observations over time forms a chain of states, such as [sunny, sunny, rainy, sunny, …], and this is called history.
+
+To call such system an Markov Process, it need to fulfill the Markov Property, which means that the future system dynamics from any state have to depend on this state only. The main point of the Markov property is to make every observable state self-contained to describe the future of the system. In this chase, **only one state is required to model the future dynamics of the system and not the whole history** or, say, the last N states. 
+
+As the system model complies with Markov property, you can capture transition probabilities with a transition matrix, which is a square matrix of the size N x N, where N is the number of states in our model. Every cell in a row, i, and a column, j, in the matrix contains the probability of the system to transition from state i to state j. The transition matrix defines the system dynamics. Additionally, Markov process implies stationarity, where there is no any factor influencing the system dynamics. 
+
+A state transition graph, where circle represents the state, arrow represents the possible transitions and self revolving arrows represents the self-state. If a model is at coffee state, then its next state is only depends on the Coffee state not any state before it.
+
+In Markov reward processes, the Markov process is extended to a bit by adding the reward value to out transition from state to state. Reward is a another square matrix, similar to the transition matrix, with reward given for transitioning from state i to state j, which reside in row i and column j. 
+
+The return (Gt) is the sum of rewards agent collects in future from the time ‘t’ onward. The discount factor (Gamma) is applied at every step starting from the point where we calculate the return Gt. The farther the reward is in time, the higher the power of Gamma, which means bigger discount. 
+
+In RL, the agent uses these rewards to calculate:
+
+1. **Immediate reward** (R) for each step.
+2. **Return** (Gt) by summing up discounted future rewards.
+3. **Value function** (V(s)) to average the returns for a state.
+
+The State Value [V(s)] is the average return obtained from the Markov reward processes. The equation of the state value is given as:
+This equation simply represents, **“ If I start at state s, what is the average total reward I can expect over time?”**
+
+V(s) quantifies how **good** a state s is in terms of long-term rewards. In RL, this concept is extended to find the optimal policies that maximize V(s)
+
+In the absence of terminal states (sink states) in infinite horizon problems, the value of Gamma = 1, the agent becomes completely far-sighted and cares about all the future rewards equally, no matter how far they are in the future which leads the agent to sums all future rewards infinitely.
+
+The value of Gamma = 1 is idea for finite-horizon problems (tic-tac-toe) but impractical in infinite-horizon problems without a stopping condition. A larger gamma (e.g., 0.9 or 0.99) means the agent considers the **long-term future more**, but rewards farther in time still diminish in value.Gamma < 1 avoids the problem of infinite sums, which is common in infinite-horizon problems.
+### Policy
+
+Policy is some set of rules that controls the agent’s behavior. The main objective of RL is to gather the maximum cumulative return as possible. Mathematically policy can be represented by the given equation,
+
+## Dynamic Programming and Bellman Equation
+
+Dynamic programming consist of two different parts, dynamic and programming, the term dynamic means such problems with temporal or sequential aspect, and the programming means optimizing the policy, mathematically. 
+
+Any problem to be solved with dynamic programming requires following property: 
+
+1. Optimal substructure
+2. Overlapping sub problems
+
+These properties are satisfied by the MDP (Markov Decision Process) which allow the use of Bellman Optimality equation to creates the recursive decomposition to the problem. 
+
+---
+
+Bellman Equation of Optimality applies for two different cases: 
+
+1. Deterministic Case
+2. Stochastic Case
+
